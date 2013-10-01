@@ -1,4 +1,5 @@
 /*jshint eqnull:true, expr:true*/
+//Arkady's project
 
 var _ = { };
 
