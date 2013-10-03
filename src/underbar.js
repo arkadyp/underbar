@@ -234,6 +234,18 @@ var _ = { };
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    if(typeof(obj) == 'undefined') {
+      obj = {};
+    }
+
+    _.each(arguments, function(object, key, arguments) {      
+      _.each(object, function(propValue, propName, object) {         
+        if(!(propName in obj)) {
+          obj[propName] = propValue;  
+        }        
+      });
+    });  
+    return obj;  
   };
 
 
