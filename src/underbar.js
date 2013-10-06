@@ -318,6 +318,19 @@ var _ = { };
 
   // Shuffle an array.
   _.shuffle = function(array) {
+    var randomized = [];
+    _.each(array, function(value) {
+      randomized.push([value, Math.random()])
+    });
+    randomized.sort(function(a,b) {return a[1] - b[1]});
+    
+    array = [];
+    
+    _.each(randomized, function(value) {
+      array.push(value[0]);
+    });
+
+    return array;
   };
 
 
