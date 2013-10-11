@@ -354,8 +354,7 @@ var _ = { };
       collection.sort(function(a,b) {
         return iterator(a) - iterator(b);
       })
-    }
-    console.log(collection+'\n');
+    }    
     return collection;
   };
 
@@ -365,6 +364,22 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    //find largest array in argument
+    var maxLength = 0;    
+    _.each(arguments, function(array, argNum, collection) {
+        if(array.length > maxLength) {
+          maxLength = array.length;
+        }     
+    })
+    
+    var zipArr = [];    
+    for(var i = 0; i < maxLength; i++) {  //cycle through all array elements
+      zipArr[i] = []; //inital empty array that will store array[i] of each argument
+      for(var j = 0; j < arguments.length; j++) { //cycle through all arryas        
+        zipArr[i].push(arguments[j][i]);        
+      }      
+    }
+    return zipArr;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
