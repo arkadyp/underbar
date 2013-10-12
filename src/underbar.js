@@ -387,25 +387,27 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
-    if(typeof(result) === 'undefined' || typeof(result) === 'null') {
+    if(typeof(result) === 'undefined' || typeof(result) === 'null') { //initialize array to store flattened result
       result = [];
     }
-    for(var i = 0; i < nestedArray.length; i++) {
-      if(Array.isArray(nestedArray[i])) {
+    for(var i = 0; i < nestedArray.length; i++) { //loop through each element of nested array
+      if(Array.isArray(nestedArray[i])) { //check if element is an array
         var newArr = [];
-        _.each(nestedArray[i], function(val){
+        _.each(nestedArray[i], function(val){ //add each element in inner array to flattened result
           newArr.push(val);
         });
-        for(var j = i+1; j < nestedArray.length; j++) {
+        for(var j = i+1; j < nestedArray.length; j++) { //add remainder of nested array elements
           newArr.push(nestedArray[j]);
         }
-        _.flatten(newArr, result);
+        return _.flatten(newArr, result); //recall fuction w/ one layer flattened
         break;
       }
       else {
-        result.push(nestedArray[i]);
+        result.push(nestedArray[i]); //if element isn't an array, add the value to flattened result
+        if(i === nestedArray.length-1) {
+          return result;
+        }
       }      
-      console.log(result);
     }    
   };
 
