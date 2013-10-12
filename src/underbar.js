@@ -387,6 +387,26 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    if(typeof(result) === 'undefined' || typeof(result) === 'null') {
+      result = [];
+    }
+    for(var i = 0; i < nestedArray.length; i++) {
+      if(Array.isArray(nestedArray[i])) {
+        var newArr = [];
+        _.each(nestedArray[i], function(val){
+          newArr.push(val);
+        });
+        for(var j = i+1; j < nestedArray.length; j++) {
+          newArr.push(nestedArray[j]);
+        }
+        _.flatten(newArr, result);
+        break;
+      }
+      else {
+        result.push(nestedArray[i]);
+      }      
+      console.log(result);
+    }    
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
