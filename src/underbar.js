@@ -414,6 +414,33 @@ var _ = { };
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    //find the index of smallest array
+    var smallestLength = arguments[0].length, 
+        smallest = 0; //index of the smallest array
+    for(var i = 1; i < arguments.length; i++) {
+      if(arguments[i].length < smallestLength) {
+        smallestLength = arguments[i].length;
+        smallest = i;
+      }
+    }
+    
+    var intersection = [], hasValue;
+    for(var index = 0; index < arguments[smallest].length; index++) { //cycle through values in smallest array
+      hasValue = true;
+      for(var i = 0; i < arguments.length; i++) { //cycle through all arrays;
+        //stop checking through arrays for matching value if one of the arrays wasn't a match
+        //do not check smallest array against itself
+        if(!(i === smallest) && hasValue) {
+          hasValue = _.contains(arguments[i], arguments[smallest][index]);
+          //console.log(arguments[i]+" has "+arguments[smallest][index]+": "+_.contains(arguments[i], arguments[smallest][index]));          
+        }
+      }
+      if(hasValue === true) {
+        //console.log(arguments[smallest][index]+" pushed on to "+intersection);
+        intersection.push(arguments[smallest][index]);      
+      }
+    }
+    return intersection;
   };
 
   // Take the difference between one array and a number of other arrays.
