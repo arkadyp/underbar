@@ -476,6 +476,47 @@ var _ = { };
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+
+    var startWait = null, 
+        endWait = null, 
+        que = 0,
+        result;
+
+    console.log('\n\n');
+
+    return function() {
+      //debugger;
+      var callTime = new Date();
+      console.log('Difference between call time and endWait is: '+(callTime - endWait));
+      console.log('Que is: '+que);
+      if(que === 1) {  //only allow user to que up one function call per wait period
+        console.log("DENIED");
+        return result;
+      }
+      else if(callTime > endWait) {  //allow user to call the function since wait period has passed        
+        console.log('CALL FUNCTION');
+        startWait = new Date();
+        endWait = new Date(Number(startWait)+wait);
+        result = func.apply(this, Array.prototype.slice.call(arguments).slice(2));
+        return result;
+      }
+      else {  //que up the funciton call
+        que = 1;
+        console.log('DELAY FUNCTION');
+        _.delay(function(){
+          startWait = new Date();
+          endWait = new Date(Number(startWait)+wait);
+          que = 0;
+          var result = func.apply(this, Array.prototype.slice.call(arguments).slice(2));
+          return result;
+        }, endWait - callTime);
+      }
+    }
   };
 
 }).call(this);
+
+
+
+
+
