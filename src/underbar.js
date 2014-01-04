@@ -78,6 +78,13 @@ var _ = { };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var uniqVals = [];
+    _.each(array, function(val) {
+      if(_.indexOf(uniqVals, val) === -1) {
+        uniqVals.push(val);
+      }
+    });
+    return uniqVals;
   };
 
 
