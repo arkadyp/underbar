@@ -376,7 +376,21 @@ var _ = { };
         smallest = array.length;
         smallestIndex = key;
       }
-    });    
+    });
+
+    var intersection = [];
+    for(var index = 0; index < smallest; index++) { //cycle through smallest arrays elements
+      var match = true;
+      for(var array = 0; array < arguments.length; array++) {
+        if(match && arguments[smallestIndex][index] !== arguments[array][index]) {
+          match = false;
+        }
+      }
+      if(match) {
+        intersection.push(arguments[smallestIndex][index]);
+      }
+    }
+    return intersection;
   };
 
   // Take the difference between one array and a number of other arrays.
