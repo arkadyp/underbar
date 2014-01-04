@@ -330,6 +330,13 @@ var _ = { };
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    //STEP 1: Find array with the most elements
+    var biggest = -1;
+    for(var i = 0; i < arguments.length; i++) {
+      if(arguments[i].length > biggest) {
+        biggest = arguments[i].length;
+      }
+    }
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
