@@ -23,6 +23,8 @@ var _ = { };
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    var start = Math.max(0, array.length - n);
+    return (n === undefined) ? array[array.length-1] : array.slice(start);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
