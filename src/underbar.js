@@ -396,6 +396,18 @@ var _ = { };
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    if(arguments.length < 2) {
+      return array;
+    }
+    var otherVals = {};
+    var temp = {};
+    for(var array = 1; array < arguments.length; array++) { //cycle through 'other' passed in arrays
+      _.each(arguments[array], function(val) {        
+        temp = {};
+        temp[val] = true;
+        _.defaults(otherVals, temp); //add keys to 'otherVals' to store vals from other arrays
+      });
+    }
   };
 
 
