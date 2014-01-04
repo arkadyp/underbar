@@ -368,6 +368,13 @@ var _ = { };
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    //Find array with smallest length
+    var smallest = arguments[0].length;
+    _.each(arguments, function(array) {
+      if(array.length < smallest) {
+        smallest = array.length;
+      }
+    });
   };
 
   // Take the difference between one array and a number of other arrays.
