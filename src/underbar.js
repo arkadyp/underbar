@@ -401,13 +401,21 @@ var _ = { };
     }
     var otherVals = {};
     var temp = {};
-    for(var array = 1; array < arguments.length; array++) { //cycle through 'other' passed in arrays
-      _.each(arguments[array], function(val) {        
+    for(var arr = 1; arr < arguments.length; arr++) { //cycle through 'other' passed in arrays
+      _.each(arguments[arr], function(val) {        
         temp = {};
         temp[val] = true;
         _.defaults(otherVals, temp); //add keys to 'otherVals' to store vals from other arrays
       });
     }
+
+    var difference = [];
+    _.each(array, function(val) {
+      if(!(val in otherVals)) {
+        difference.push(val);
+      }
+    });
+    return difference;
   };
 
 
