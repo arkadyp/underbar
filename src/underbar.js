@@ -291,6 +291,16 @@ var _ = { };
 
   // Shuffle an array.
   _.shuffle = function(array) {
+    var arr2 = array.slice(0);
+    var rand; //random array index
+    var temp; //temp storage for swapping array elements
+    for(var i = arr2.length - 1; i >= 0; i--) {
+      rand = Math.floor(Math.random()*i); //find random element from unswapped items
+      temp = arr2[rand]; //store random element
+      arr2[rand] = arr2[i]; //swap random element with last element
+      arr2[i] = temp; //swap last element with random element
+    }
+    return arr2;
   };
 
 
