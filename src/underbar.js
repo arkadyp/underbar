@@ -429,6 +429,28 @@ var _ = { };
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+    var callTime; //time the function was called
+    var endWait = 0; //time difference between callTime and wait
+    var que = 0; //number of func calls waiting to be performed
+    var result; //result of the latest func call;
+
+    return function() {
+      callTime = Number(new Date());
+
+      if(callTime > endWait) { //call function because wait period is over
+        endWait = callTime + wait;
+        result = func.apply(this, Array.prototype.slice.call(arguments, 2));
+      } else if(que === 0) {
+        que = 1;
+        setTimeout(function() {
+          callTime = Number(new Date());
+          endWait = callTime + wait;
+          result = func.apply(this, Array.prototype.slice.call(arguments, 2));
+          que = 1;
+        }, endWait - callTime);
+      }
+      return result;
+    }
   };
 
 }).call(this);
