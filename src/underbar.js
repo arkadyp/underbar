@@ -370,11 +370,13 @@ var _ = { };
   _.intersection = function() {
     //Find array with smallest length
     var smallest = arguments[0].length;
-    _.each(arguments, function(array) {
+    var smallestIndex = 0;
+    _.each(arguments, function(array, key) {
       if(array.length < smallest) {
         smallest = array.length;
+        smallestIndex = key;
       }
-    });
+    });    
   };
 
   // Take the difference between one array and a number of other arrays.
