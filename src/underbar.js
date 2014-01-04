@@ -214,7 +214,7 @@ var _ = { };
   _.defaults = function(obj) {
     for(var i = 1; i < arguments.length; i++) {
       _.each(arguments[i], function(val, key) {
-        if(!key in obj) {
+        if(!(key in obj)) {
           obj[key] = val;
         }
       });
