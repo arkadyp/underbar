@@ -337,6 +337,16 @@ var _ = { };
         biggest = arguments[i].length;
       }
     }
+
+    //STEP 2: Cycle through all arrays and zip together elements of same index
+    var zipped = [];    
+    for(var element = 0; element < biggest; element++) {  
+      zipped[element] = [];
+      for(var array = 0; array < arguments.length; array++) {
+        zipped[element].push(arguments[array][element]);
+      }
+    }
+    return zipped;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
