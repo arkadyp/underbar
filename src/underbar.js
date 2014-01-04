@@ -354,6 +354,15 @@ var _ = { };
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    result = result || [];
+    _.each(nestedArray, function(val) {
+      if(Array.isArray(val)) {
+        _.flatten(val, result);
+      } else {
+        result.push(val);
+      }
+    });
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
